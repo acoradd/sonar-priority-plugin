@@ -2,20 +2,38 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>org.sonarsource.plugins.example</groupId>
-  <artifactId>sonar-example-plugin</artifactId>
+  <groupId>fr.axopen.sonar</groupId>
+  <artifactId>sonar-priority-customization-plugin</artifactId>
   <packaging>sonar-plugin</packaging>
-  <version>10.0.0</version>
+  <version>10.6.0</version>
 
-  <name>Example Plugin for SonarQube 10.x</name>
-  <description>Example of Plugin for SonarQube: Foo Language, FooLint, Custom Metrics and MeasureComputers</description>
+  <name>SonarQube priority customization</name>
+  <description>Plugin for SonarQube that allow to change rule priority</description>
+
+  <organization>
+    <name>AXOPEN</name>
+    <url>https://www.axoprn.com/</url>
+  </organization>
+  <issueManagement>
+    <system>GitHub</system>
+    <url>https://github.com/axopen/sonar-priority-customization/issues</url>
+  </issueManagement>
+  <ciManagement>
+    <system>GitHub Actions</system>
+    <url>https://github.com/axopen/sonar-priority-customization/actions</url>
+  </ciManagement>
+  <scm>
+    <url>https://github.com/axopen/sonar-priority-customization</url>
+  </scm>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <sonar.apiVersion>9.8.0.203</sonar.apiVersion>
-    <sonar.testingHarnessVersion>9.5.0.56709</sonar.testingHarnessVersion>
     <jdk.min.version>17</jdk.min.version>
+    <sonar.apiVersion>10.7.0.2191</sonar.apiVersion>
+    <sonar.apiMinVersion>10.0</sonar.apiMinVersion>
+    <sonar.testingHarnessVersion>10.5.1.90531</sonar.testingHarnessVersion>
     <sonar.sources>src/main/java,src/main/js</sonar.sources>
+    <sonar.pluginKey>priority-customization</sonar.pluginKey>
   </properties>
 
   <dependencies>
@@ -43,7 +61,7 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>4.11</version>
+      <version>4.13.1</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -56,10 +74,9 @@
         <version>1.23.0.740</version>
         <extensions>true</extensions>
         <configuration>
-          <pluginKey>example</pluginKey>
-          <pluginClass>org.sonarsource.plugins.example.ExamplePlugin</pluginClass>
-          <!-- Optional, only if you are sure to support older versions of the plugin API than the one you are compiling against -->
-          <pluginApiMinVersion>9.5</pluginApiMinVersion>
+          <pluginKey>${sonar.pluginKey}</pluginKey>
+          <pluginClass>fr.axopen.sonar.severity.customization.SeverityCustomizationPlugin</pluginClass>
+          <pluginApiMinVersion>${sonar.apiMinVersion}</pluginApiMinVersion>
         </configuration>
       </plugin>
       <plugin>
@@ -68,6 +85,8 @@
         <version>3.10.1</version>
         <configuration>
           <release>11</release>
+          <source>13</source>
+          <target>13</target>
         </configuration>
       </plugin>
       <plugin>
@@ -80,40 +99,6 @@
             <goals>
               <goal>resources</goal>
             </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>com.github.eirslett</groupId>
-        <artifactId>frontend-maven-plugin</artifactId>
-        <version>1.9.1</version>
-        <executions>
-          <execution>
-            <phase>generate-resources</phase>
-            <id>install node and yarn</id>
-            <goals>
-              <goal>install-node-and-yarn</goal>
-            </goals>
-            <configuration>
-              <nodeVersion>v16.14.0</nodeVersion>
-              <yarnVersion>v1.22.5</yarnVersion>
-            </configuration>
-          </execution>
-          <execution>
-            <id>yarn install</id>
-            <goals>
-              <goal>yarn</goal>
-            </goals>
-          </execution>
-          <execution>
-            <phase>generate-resources</phase>
-            <id>yarn run script</id>
-            <goals>
-              <goal>yarn</goal>
-            </goals>
-            <configuration>
-              <arguments>run build</arguments>
-            </configuration>
           </execution>
         </executions>
       </plugin>

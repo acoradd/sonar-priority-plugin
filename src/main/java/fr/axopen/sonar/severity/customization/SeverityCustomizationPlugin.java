@@ -1,6 +1,7 @@
 /*
+ * Example Plugin for SonarQube
  * Copyright (C) 2009-2020 SonarSource SA
- * mailto:info AT sonarsource DOT com
+ * mailto:contact AT sonarsource DOT com
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -16,10 +17,19 @@
  * along with this program; if not, write to the Free Software Foundation,
  * Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-.custom-abc {
-  background-color: pink;
-}
+package fr.axopen.sonar.severity.customization;
 
-.sanity-check {
-  width: 400px
+import fr.axopen.sonar.severity.customization.measure.SeverityMeasureComputer;
+import fr.axopen.sonar.severity.customization.metric.SeverityCustomizationMetrics;
+import org.sonar.api.Plugin;
+
+
+public class SeverityCustomizationPlugin implements Plugin {
+
+  @Override
+  public void define(Context context) {
+    context.addExtension(SeverityCustomizationMetrics.class);
+    context.addExtension(SeverityMeasureComputer.class);
+
+  }
 }

@@ -11,19 +11,19 @@
   <description>Plugin for SonarQube that allow to change rule priority</description>
 
   <organization>
-    <name>AXOPEN</name>
-    <url>https://www.axoprn.com/</url>
+    <name>Acoradd</name>
+    <url>https://github.com/acoradd</url>
   </organization>
   <issueManagement>
     <system>GitHub</system>
-    <url>https://github.com/axopen/sonar-priority-customization/issues</url>
+    <url>https://github.com/acoradd/sonar-priority-plugin/issues</url>
   </issueManagement>
   <ciManagement>
     <system>GitHub Actions</system>
-    <url>https://github.com/axopen/sonar-priority-customization/actions</url>
+    <url>https://github.com/acoradd/sonar-priority-plugin/actions</url>
   </ciManagement>
   <scm>
-    <url>https://github.com/axopen/sonar-priority-customization</url>
+    <url>https://github.com/acoradd/sonar-priority-plugin</url>
   </scm>
 
   <properties>
